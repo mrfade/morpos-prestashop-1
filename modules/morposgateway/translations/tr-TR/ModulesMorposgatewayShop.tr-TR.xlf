@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="tr" datatype="plaintext" original="modules/morposgateway">
+    <body>
+      <trans-unit id="278b6e7a0e03a05cae826507363b1a71" approved="yes">
+        <source>Retry Payment</source>
+        <target state="final">Ödemeyi Tekrar Dene</target>
+      </trans-unit>
+      <trans-unit id="9840d053e3fcc8eaca29dc18604c4762" approved="yes">
+        <source>Payment Failed</source>
+        <target state="final">Ödeme Başarısız</target>
+      </trans-unit>
+      <trans-unit id="688bbb0a83b978a2ba4908dbaf008520" approved="yes">
+        <source>Please try again or contact support if the problem persists.</source>
+        <target state="final">Lütfen tekrar deneyin veya sorun devam ederse destek ile iletişime geçin.</target>
+      </trans-unit>
+      <trans-unit id="170a61668451786247e75966161fc5ab" approved="yes">
+        <source>Order Reference</source>
+        <target state="final">Sipariş Referansı</target>
+      </trans-unit>
+      <trans-unit id="0787edd2ae3b4dcb9ea898afaf127703" approved="yes">
+        <source>Amount to Pay</source>
+        <target state="final">Ödenecek Tutar</target>
+      </trans-unit>
+      <trans-unit id="a200ab152d4b645e2fd23269233a01f1" approved="yes">
+        <source>Your previous payment attempt was not successful. Click the button below to try again.</source>
+        <target state="final">Önceki ödeme denemeniz başarılı olmadı. Tekrar denemek için aşağıdaki butona tıklayın.</target>
+      </trans-unit>
+      <trans-unit id="d4ca2cdb7258bce17ac8b81565cda156" approved="yes">
+        <source>This order is not awaiting payment and cannot be retried.</source>
+        <target state="final">Bu sipariş ödeme beklemediği için tekrar denenemez.</target>
+      </trans-unit>
+      <trans-unit id="280152c7b4a48ed74de8a65c47b135e3" approved="yes">
+        <source>Payment initialization failed.</source>
+        <target state="final">Ödeme başlatılamadı.</target>
+      </trans-unit>
+      <trans-unit id="4ff7415343be4b9d7177d659dadfbf08" approved="yes">
+        <source>Network error. Please check your connection.</source>
+        <target state="final">Ağ hatası. Lütfen bağlantınızı kontrol edin.</target>
+      </trans-unit>
+      <trans-unit id="05f78b9256d74c2748289d2829c81593" approved="yes">
+        <source>Payment</source>
+        <target state="final">Ödeme</target>
+      </trans-unit>
+      <trans-unit id="a0b50d83f182e4aabe91e3516f023a67" approved="yes">
+        <source>Payment Failed</source>
+        <target state="final">Ödeme Başarısız</target>
+      </trans-unit>
+      <trans-unit id="ccce425dbc71865a87d2ba630f40df0f" approved="yes">
+        <source>Please try again or contact support if the problem persists.</source>
+        <target state="final">Lütfen tekrar deneyin veya sorun devam ederse destek ile iletişime geçin.</target>
+      </trans-unit>
+      <trans-unit id="b8ca5f73413ae0292eed5334e6dbc274" approved="yes">
+        <source>Order Reference:</source>
+        <target state="final">Sipariş Referansı:</target>
+      </trans-unit>
+      <trans-unit id="6dd0e8ef2fd3d0a48d0c36fe50cb52a3" approved="yes">
+        <source>Amount to Pay:</source>
+        <target state="final">Ödenecek Tutar:</target>
+      </trans-unit>
+      <trans-unit id="a2aa6f87fa8bc68140da9dce8eae305a" approved="yes">
+        <source>You are about to pay with credit or debit card.</source>
+        <target state="final">Kredi veya banka kartı ile ödeme yapmak üzeresiniz.</target>
+      </trans-unit>
+      <trans-unit id="a99146c10bfa68af02b42f238e61d1ab" approved="yes">
+        <source>Please click the button below to proceed to the secure payment page.</source>
+        <target state="final">Güvenli ödeme sayfasına geçmek için lütfen aşağıdaki butona tıklayın.</target>
+      </trans-unit>
+      <trans-unit id="7b86eec2984e5735e6fca2ec19fd55d7" approved="yes">
+        <source>Payment</source>
+        <target state="final">Ödeme</target>
+      </trans-unit>
+      <trans-unit id="6a79a38da623c6c8a77a6c43a29858ed" approved="yes">
+        <source>Payment Not Available</source>
+        <target state="final">Ödeme Mevcut Değil</target>
+      </trans-unit>
+      <trans-unit id="cba6547ebcc9d8c5229ff07df94319b3" approved="yes">
+        <source>You can only make payments for orders that are awaiting payment. This order is no longer in a pending payment status.</source>
+        <target state="final">Sadece ödeme bekleyen siparişler için ödeme yapabilirsiniz. Bu sipariş artık bekleyen ödeme durumunda değil.</target>
+      </trans-unit>
+      <trans-unit id="f15fd68cbfb7bfe8b3283c3bb2eaf117" approved="yes">
+        <source>Return to Order History</source>
+        <target state="final">Sipariş Geçmişine Dön</target>
+      </trans-unit>
+      <trans-unit id="e51945a4ce5dc5862fb14e89636ab8a2" approved="yes">
+        <source>Pay securely with your credit or debit card through MorPOS Payment Plugin.</source>
+        <target state="final">Kredi veya banka kartınızla MorPOS üzerinden güvenle ödeme yapın.</target>
+      </trans-unit>
+      <trans-unit id="dffded740d69cc4efac15ba5c684b460" approved="yes">
+        <source>A secure payment form will open for you to complete your payment.</source>
+        <target state="final">Ödemenizi tamamlamanız için güvenli bir ödeme formu açılacaktır.</target>
+      </trans-unit>
+      <trans-unit id="fe870b16fb4a09f07253761202ef74c8" approved="yes">
+        <source>Payment Error</source>
+        <target state="final">Ödeme Hatası</target>
+      </trans-unit>
+      <trans-unit id="280fefbadb012611bd433e218e783293" approved="yes">
+        <source>Processing...</source>
+        <target state="final">İşleniyor...</target>
+      </trans-unit>
+      <trans-unit id="d30adc14d7d1198c20e7d7ae991cace5" approved="yes">
+        <source>Preparing secure payment form...</source>
+        <target state="final">Güvenli ödeme formu hazırlanıyor...</target>
+      </trans-unit>
+      <trans-unit id="bf03d214dd5e50d082f990f4cff99766" approved="yes">
+        <source>Payment Successful!</source>
+        <target state="final">Ödeme Başarılı!</target>
+      </trans-unit>
+      <trans-unit id="d7d6f3e22e3b85e23a681355d3eabf7b" approved="yes">
+        <source>Your payment has been processed successfully.</source>
+        <target state="final">Ödemeniz başarıyla işleme alındı.</target>
+      </trans-unit>
+      <trans-unit id="4d0bff650cad1bec686e5bf887fa27c6" approved="yes">
+        <source>Order reference:</source>
+        <target state="final">Sipariş referansı:</target>
+      </trans-unit>
+      <trans-unit id="1b5a31c85a0a48b41ea123c0116d39c2" approved="yes">
+        <source>You will receive an order confirmation email shortly.</source>
+        <target state="final">Kısa süre içinde sipariş onay e-postası alacaksınız.</target>
+      </trans-unit>
+      <trans-unit id="05b260c9712a5728d914ccdd7e88bbb7" approved="yes">
+        <source>Pay securely with your credit or debit card through MorPOS Payment Plugin.</source>
+        <target state="final">Kredi veya banka kartınızla MorPOS üzerinden güvenle ödeme yapın.</target>
+      </trans-unit>
+      <trans-unit id="7fbcb49639bd7955928f98a86627913e" approved="yes">
+        <source>You will be redirected to a secure payment page.</source>
+        <target state="final">Güvenli bir ödeme sayfasına yönlendirileceksiniz.</target>
+      </trans-unit>
+      <trans-unit id="6e51c03f154ece21388328c12eb66dcd" approved="yes">
+        <source>Invalid cart.</source>
+        <target state="final">Geçersiz sepet.</target>
+      </trans-unit>
+      <trans-unit id="c100a9ba05914ca9766d434993364e62" approved="yes">
+        <source>Cart Error</source>
+        <target state="final">Sepet Hatası</target>
+      </trans-unit>
+      <trans-unit id="34ec25fe4b8d0ddc5e674963caf1d5de" approved="yes">
+        <source>Invalid customer.</source>
+        <target state="final">Geçersiz müşteri.</target>
+      </trans-unit>
+      <trans-unit id="c54ce2b104e89f07219b6fe96bfb92e8" approved="yes">
+        <source>Customer Error</source>
+        <target state="final">Müşteri Hatası</target>
+      </trans-unit>
+      <trans-unit id="160eecfc2c2cd9518d68e7731bd9ed63" approved="yes">
+        <source>Invalid cart or customer.</source>
+        <target state="final">Geçersiz sepet veya müşteri.</target>
+      </trans-unit>
+      <trans-unit id="5fc7efade29c2480f4f5e4c247136463" approved="yes">
+        <source>Validation Error</source>
+        <target state="final">Doğrulama Hatası</target>
+      </trans-unit>
+      <trans-unit id="358e69af77262321d07f60ef9e617a4e" approved="yes">
+        <source>Security validation failed.</source>
+        <target state="final">Güvenlik doğrulaması başarısız.</target>
+      </trans-unit>
+      <trans-unit id="72d4c6f0caa8b84f2574a479b691b117" approved="yes">
+        <source>Security Error</source>
+        <target state="final">Güvenlik Hatası</target>
+      </trans-unit>
+      <trans-unit id="93225b0af367c5b69af30d778fb41629" approved="yes">
+        <source>Too many payment attempts. Please wait a few minutes and try again.</source>
+        <target state="final">Çok fazla ödeme denemesi yapıldı. Lütfen birkaç dakika bekleyin ve tekrar deneyin.</target>
+      </trans-unit>
+      <trans-unit id="36dacce142278db2fb729738ce118f01" approved="yes">
+        <source>Rate Limit</source>
+        <target state="final">Hız Sınırı</target>
+      </trans-unit>
+      <trans-unit id="f574b30ebdc041faeb741e2f0c6d1881" approved="yes">
+        <source>Payment gateway is not properly configured.</source>
+        <target state="final">Ödeme gateway düzgün yapılandırılmamış.</target>
+      </trans-unit>
+      <trans-unit id="e6c62e67029e40ccad236f1e034ebb09" approved="yes">
+        <source>Configuration Error</source>
+        <target state="final">Yapılandırma Hatası</target>
+      </trans-unit>
+      <trans-unit id="b44b06ac4178ca1ba4860c3d8a5cd53b" approved="yes">
+        <source>Failed to create order.</source>
+        <target state="final">Sipariş oluşturulamadı.</target>
+      </trans-unit>
+      <trans-unit id="8fa56a3865642f71f29baf21a7faafd1" approved="yes">
+        <source>Order Creation Error</source>
+        <target state="final">Sipariş Oluşturma Hatası</target>
+      </trans-unit>
+      <trans-unit id="891ccda8924f3955706165c1c6fce608" approved="yes">
+        <source>Currency not supported.</source>
+        <target state="final">Para birimi desteklenmiyor.</target>
+      </trans-unit>
+      <trans-unit id="059aa613dde00daa8fc37d5f9cc936a1" approved="yes">
+        <source>Currency Error</source>
+        <target state="final">Para Birimi Hatası</target>
+      </trans-unit>
+      <trans-unit id="5479dbfaa7808ed8488d991f21f65b1c" approved="yes">
+        <source>Payment data not received.</source>
+        <target state="final">Ödeme verileri alınamadı.</target>
+      </trans-unit>
+      <trans-unit id="576de95f04c06be86ba714de131f981d" approved="yes">
+        <source>Gateway Error</source>
+        <target state="final">Gateway Hatası</target>
+      </trans-unit>
+      <trans-unit id="49a864d6f97fb549142b73f713854a34" approved="yes">
+        <source>Payment initialization failed.</source>
+        <target state="final">Ödeme başlatılamadı.</target>
+      </trans-unit>
+      <trans-unit id="be957a78f086f526c3f4737d73dd30f4" approved="yes">
+        <source>Payment Gateway Error</source>
+        <target state="final">Ödeme Gateway Hatası</target>
+      </trans-unit>
+      <trans-unit id="dacbf10f43149a21a29a8b3cf59a74e0" approved="yes">
+        <source>Invalid order.</source>
+        <target state="final">Geçersiz sipariş.</target>
+      </trans-unit>
+      <trans-unit id="be3dc22e46144945702b4cad714b358e" approved="yes">
+        <source>Order Error</source>
+        <target state="final">Sipariş Hatası</target>
+      </trans-unit>
+      <trans-unit id="5c3e298872a2652770e6f581f8b663df" approved="yes">
+        <source>Payment failed. Please try again.</source>
+        <target state="final">Ödeme başarısız. Lütfen tekrar deneyin.</target>
+      </trans-unit>
+      <trans-unit id="1d02534fe249f4e9bdab2c65b8925813" approved="yes">
+        <source>Payment initialization failed.</source>
+        <target state="final">Ödeme başlatılamadı.</target>
+      </trans-unit>
+      <trans-unit id="3d664868ddba27cca978e2cc9e3d5ef0" approved="yes">
+        <source>Network error. Please check your connection.</source>
+        <target state="final">Ağ hatası. Lütfen bağlantınızı kontrol edin.</target>
+      </trans-unit>
+      <trans-unit id="9435d21ed51f2c58dea8928113a8f384" approved="yes">
+        <source>Payment Error</source>
+        <target state="final">Ödeme Hatası</target>
+      </trans-unit>
+      <trans-unit id="fc71feb39500a23e203d42d7a81d4f23" approved="yes">
+        <source>System Error</source>
+        <target state="final">Sistem Hatası</target>
+      </trans-unit>
+      <trans-unit id="8f8cb5cca7b14a9145ac618e18eb1641" approved="yes">
+        <source>Network Error</source>
+        <target state="final">Ağ Hatası</target>
+      </trans-unit>
+      <trans-unit id="1a7359ce8e54afa5981b008c4690aaee" approved="yes">
+        <source>Payment Failed</source>
+        <target state="final">Ödeme Başarısız</target>
+      </trans-unit>
+      <trans-unit id="156a7a69281e2d47fb35b8dd78ffab97" approved="yes">
+        <source>Unable to connect to payment server. Please try again.</source>
+        <target state="final">Ödeme sunucusuna bağlanılamadı. Lütfen tekrar deneyin.</target>
+      </trans-unit>
+      <trans-unit id="0f9c852bd8cbeced02d773aa7da18b63" approved="yes">
+        <source>Unable to connect to payment server. Please check your connection and try again.</source>
+        <target state="final">Ödeme sunucusuna bağlanılamadı. Lütfen bağlantınızı kontrol edin ve tekrar deneyin.</target>
+      </trans-unit>
+      <trans-unit id="d34c3194ce1aad40e69accb0e097967e" approved="yes">
+        <source>Invalid payment session.</source>
+        <target state="final">Geçersiz ödeme oturumu.</target>
+      </trans-unit>
+      <trans-unit id="b5d4cde148d4bfd188cb7a2a15cf63c1" approved="yes">
+        <source>Payment verification failed.</source>
+        <target state="final">Ödeme doğrulaması başarısız.</target>
+      </trans-unit>
+      <trans-unit id="125315e4d518c22a468a716982859491" approved="yes">
+        <source>Payment failed.</source>
+        <target state="final">Ödeme başarısız.</target>
+      </trans-unit>
+      <trans-unit id="0e2cc552665c2b59f71d2bd81e0774ff" approved="yes">
+        <source>Missing conversation ID.</source>
+        <target state="final">Conversation ID eksik.</target>
+      </trans-unit>
+      <trans-unit id="eb3b2ff5c085ae8f0b42ffc8c72f502a" approved="yes">
+        <source>Payment amount verification failed.</source>
+        <target state="final">Ödeme tutarı doğrulaması başarısız.</target>
+      </trans-unit>
+      <trans-unit id="29653f78da983a6161759cda3949796d" approved="yes">
+        <source>Processing Payment</source>
+        <target state="final">Ödeme İşleniyor</target>
+      </trans-unit>
+      <trans-unit id="0ae67e66e370384ecf1b9924cb559003" approved="yes">
+        <source>Processing Payment</source>
+        <target state="final">Ödeme İşleniyor</target>
+      </trans-unit>
+      <trans-unit id="3c839e5619cb926af1084d59cdfa12a9" approved="yes">
+        <source>Please wait while we process your payment...</source>
+        <target state="final">Ödemenizi işlerken lütfen bekleyin...</target>
+      </trans-unit>
+      <trans-unit id="f1dcb779bb0bc7f3c804affc961716f7" approved="yes">
+        <source>Payment Successful!</source>
+        <target state="final">Ödeme Başarılı!</target>
+      </trans-unit>
+      <trans-unit id="ca4713798e4c93431249b000546e2f50" approved="yes">
+        <source>Payment Failed</source>
+        <target state="final">Ödeme Başarısız</target>
+      </trans-unit>
+      <trans-unit id="a994c618e2ef43425a1b062d427d6a1c" approved="yes">
+        <source>Redirecting to order details...</source>
+        <target state="final">Sipariş detaylarına yönlendiriliyor...</target>
+      </trans-unit>
+      <trans-unit id="db4fea0e339b124c2ae1f5084fab4fbd" approved="yes">
+        <source>Redirecting automatically...</source>
+        <target state="final">Otomatik yönlendiriliyor...</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
