@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="tr" datatype="plaintext" original="modules/morposgateway">
+    <body>
+      <trans-unit id="e1fd22be9a0f28b6a7b8c6250702232d" approved="yes">
+        <source>MorPOS Payment Plugin</source>
+        <target state="final">MorPOS Ödeme Plugini</target>
+      </trans-unit>
+      <trans-unit id="38fe0660ce7f97fdd178604ca1be0539" approved="yes">
+        <source>Accept credit card payments through MorPOS Payment Plugin.</source>
+        <target state="final">MorPOS üzerinden kredi kartı ödemelerini kabul edin.</target>
+      </trans-unit>
+      <trans-unit id="ed9099ecdf91a35684bc9828d7b93c9b" approved="yes">
+        <source>Are you sure you want to uninstall this module?</source>
+        <target state="final">Bu modülü kaldırmak istediğinizden emin misiniz?</target>
+      </trans-unit>
+      <trans-unit id="f5e86a8689464d6f27e32bfc0118bf0f" approved="yes">
+        <source>Cannot install MorPOS Gateway. Missing required PHP extensions: %s</source>
+        <target state="final">MorPOS Ödeme Plugini kurulamıyor. Gerekli PHP eklentileri eksik: %s</target>
+      </trans-unit>
+      <trans-unit id="5c5870338d656cce60f01214edd4614f" approved="yes">
+        <source>Settings updated successfully.</source>
+        <target state="final">Ayarlar başarıyla güncellendi.</target>
+      </trans-unit>
+      <trans-unit id="478914a9b43080a471da1a956bee33e3" approved="yes">
+        <source>Please fill all credential fields.</source>
+        <target state="final">Lütfen tüm kimlik bilgisi alanlarını doldurun.</target>
+      </trans-unit>
+      <trans-unit id="f8f0356f0c66bc03fed53545467096f5" approved="yes">
+        <source>Connection successful!</source>
+        <target state="final">Bağlantı başarılı!</target>
+      </trans-unit>
+      <trans-unit id="0d679500072b0065895b34c85e50357c" approved="yes">
+        <source>Connection failed.</source>
+        <target state="final">Bağlantı başarısız.</target>
+      </trans-unit>
+      <trans-unit id="c1534587ff70aaf6b89b9e3483003e9c" approved="yes">
+        <source>Connection failed: </source>
+        <target state="final">Bağlantı başarısız: </target>
+      </trans-unit>
+      <trans-unit id="fbd9ea08a2a4c40bfc40700c0997456c" approved="yes">
+        <source>Not detected</source>
+        <target state="final">Algılanmadı</target>
+      </trans-unit>
+      <trans-unit id="227297c51280bb7b4b31ddd2a6de76c3" approved="yes">
+        <source>Below required</source>
+        <target state="final">Gerekenden düşük</target>
+      </trans-unit>
+      <trans-unit id="3efd735dec1743473bd70e0d13c8def2" approved="yes">
+        <source>Allowed but discouraged</source>
+        <target state="final">İzin veriliyor ancak önerilmiyor</target>
+      </trans-unit>
+      <trans-unit id="34b8318f6a03a564f04c152442c011b3" approved="yes">
+        <source>Meets recommended</source>
+        <target state="final">Önerilen seviyede</target>
+      </trans-unit>
+      <trans-unit id="fca4f848f8de6f262c6b55b2044ff39b" approved="yes">
+        <source>Unable to verify TLS support</source>
+        <target state="final">TLS desteği doğrulanamıyor</target>
+      </trans-unit>
+      <trans-unit id="a18684768d8479743f42ffbdd0e9933e" approved="yes">
+        <source>PHP</source>
+        <target state="final">PHP</target>
+      </trans-unit>
+      <trans-unit id="3672842d2da2f522f4598ad93674724a" approved="yes">
+        <source>PrestaShop</source>
+        <target state="final">PrestaShop</target>
+      </trans-unit>
+      <trans-unit id="bd1c383419f30b8aa5c07c61fd1ac4bd" approved="yes">
+        <source>TLS</source>
+        <target state="final">TLS</target>
+      </trans-unit>
+      <trans-unit id="673a3bdb3ce28da0d724f3f44e9a05fd" approved="yes">
+        <source>Unknown</source>
+        <target state="final">Bilinmiyor</target>
+      </trans-unit>
+      <trans-unit id="bc26d546155fdbc0726f6cbd53691a89" approved="yes">
+        <source>SSL/TLS available (version unknown)</source>
+        <target state="final">SSL/TLS mevcut (sürüm bilinmiyor)</target>
+      </trans-unit>
+      <trans-unit id="6847081e9b5d8493a0037d38b3e0dee1" approved="yes">
+        <source>No SSL/TLS detected</source>
+        <target state="final">SSL/TLS algılanmadı</target>
+      </trans-unit>
+      <trans-unit id="84600a0b0900f23b5d9dfea6fbf063be" approved="yes">
+        <source>Pay with Credit/Debit Card</source>
+        <target state="final">Kredi/Banka Kartı ile Öde</target>
+      </trans-unit>
+      <trans-unit id="4ad9376faafb87c1c82eed278098dad5" approved="yes">
+        <source>Payment Error</source>
+        <target state="final">Ödeme Hatası</target>
+      </trans-unit>
+      <trans-unit id="90d210f04a4e7fd3e6880067472a209e" approved="yes">
+        <source>System Error</source>
+        <target state="final">Sistem Hatası</target>
+      </trans-unit>
+      <trans-unit id="7bd1565a255ef565394acbbb6160a795" approved="yes">
+        <source>Network Error</source>
+        <target state="final">Ağ Hatası</target>
+      </trans-unit>
+      <trans-unit id="cdea07c5ec88a3a38a55a6117c0fa98d" approved="yes">
+        <source>Payment Failed</source>
+        <target state="final">Ödeme Başarısız</target>
+      </trans-unit>
+      <trans-unit id="48146ebd2ea97d20ac4760db93c788f9" approved="yes">
+        <source>Payment initialization failed. Please try again.</source>
+        <target state="final">Ödeme başlatılamadı. Lütfen tekrar deneyin.</target>
+      </trans-unit>
+      <trans-unit id="aa96e7d244cbb29f9f9876db481bd4f9" approved="yes">
+        <source>Unable to connect to payment server. Please try again.</source>
+        <target state="final">Ödeme sunucusuna bağlanılamadı. Lütfen tekrar deneyin.</target>
+      </trans-unit>
+      <trans-unit id="596f8287171477d3004a7e7fb4ad0020" approved="yes">
+        <source>Unable to connect to payment server. Please check your connection and try again.</source>
+        <target state="final">Ödeme sunucusuna bağlanılamadı. Lütfen bağlantınızı kontrol edin ve tekrar deneyin.</target>
+      </trans-unit>
+      <trans-unit id="e4a0ae7e8f8534d51027fc1977e3d9f7" approved="yes">
+        <source>MorPOS Payment Plugin</source>
+        <target state="final">MorPOS Ödeme Eklentisi</target>
+      </trans-unit>
+      <trans-unit id="0574c7dbe0b9e737fcd8b5e99bddf299" approved="yes">
+        <source>MorPOS PrestaShop is a virtual POS plugin specially developed for e-commerce websites built on the PrestaShop infrastructure. With this plugin, you can easily accept payments from your customers via credit or debit card — either in full or in installments — and integrate seamlessly with all banks. It is easy to install and requires no technical knowledge.</source>
+        <target state="final">MorPOS PrestaShop, PrestaShop altyapısı üzerine kurulu e-ticaret siteleri için özel olarak geliştirilmiş bir sanal POS eklentisidir. Bu eklenti ile müşterilerinizden kredi veya banka kartı ile — tek çekim veya taksitli — kolayca ödeme alabilir ve tüm bankalarla sorunsuz entegrasyon sağlayabilirsiniz. Kurulumu kolaydır ve teknik bilgi gerektirmez.</target>
+      </trans-unit>
+      <trans-unit id="976fed711f888c8a5fffc724b21e0007" approved="yes">
+        <source>Version</source>
+        <target state="final">Sürüm</target>
+      </trans-unit>
+      <trans-unit id="7db07ee8f4afdc61a530efd1926cbcf1" approved="yes">
+        <source>Setup</source>
+        <target state="final">Kurulum</target>
+      </trans-unit>
+      <trans-unit id="a0d783f118e2179205847a5d68939f94" approved="yes">
+        <source>Connection Successful</source>
+        <target state="final">Bağlantı Başarılı</target>
+      </trans-unit>
+      <trans-unit id="27451ceb7de64e6310277bf9e1cf10b3" approved="yes">
+        <source>Connection Failed</source>
+        <target state="final">Bağlantı Başarısız</target>
+      </trans-unit>
+      <trans-unit id="d1e5e32901d26881da6b67c1e26e2f55" approved="yes">
+        <source>Test Connection</source>
+        <target state="final">Bağlantıyı Test Et</target>
+      </trans-unit>
+      <trans-unit id="a36554ef33cad0a7cfd68e678aac122e" approved="yes">
+        <source>Status</source>
+        <target state="final">Durum</target>
+      </trans-unit>
+      <trans-unit id="31e173199f3c6283770b821cd417864c" approved="yes">
+        <source>Enable</source>
+        <target state="final">Etkinleştir</target>
+      </trans-unit>
+      <trans-unit id="465c060585c75b00bfb475400f5ce564" approved="yes">
+        <source>Test Mode</source>
+        <target state="final">Test Modu</target>
+      </trans-unit>
+      <trans-unit id="62b17b48715d842c215c1fabc2c82b29" approved="yes">
+        <source>Enable Test Mode</source>
+        <target state="final">Test Modunu Etkinleştir</target>
+      </trans-unit>
+      <trans-unit id="038bfbbd2c78135290f6be6b2de443ab" approved="yes">
+        <source>For testing purposes only</source>
+        <target state="final">Sadece test amaçlıdır</target>
+      </trans-unit>
+      <trans-unit id="59c2e868d0f3133de5a8146842846994" approved="yes">
+        <source>Merchant ID</source>
+        <target state="final">Üye İşyeri ID</target>
+      </trans-unit>
+      <trans-unit id="ad2149304d845df0f8b2bb8207bcba81" approved="yes">
+        <source>Your MorPOS Merchant ID</source>
+        <target state="final">MorPOS Üye İşyeri ID'niz</target>
+      </trans-unit>
+      <trans-unit id="5c50b66f477e0c31b97d4551ed78a074" approved="yes">
+        <source>Client ID</source>
+        <target state="final">İstemci ID</target>
+      </trans-unit>
+      <trans-unit id="2372a3ba4284318435d4a06efb4a4a39" approved="yes">
+        <source>Your MorPOS Client ID</source>
+        <target state="final">MorPOS İstemci ID'niz</target>
+      </trans-unit>
+      <trans-unit id="0621074a7c486bb3c05d488ac46f7eb3" approved="yes">
+        <source>Client Secret</source>
+        <target state="final">İstemci Gizli Anahtarı</target>
+      </trans-unit>
+      <trans-unit id="3cc80e0b575c6f38a0f18a4ee1f11a33" approved="yes">
+        <source>Your MorPOS Client Secret</source>
+        <target state="final">MorPOS İstemci Gizli Anahtarınız</target>
+      </trans-unit>
+      <trans-unit id="b9af423fdf5fa3f8252bea8d5b10253a" approved="yes">
+        <source>API Key</source>
+        <target state="final">API Anahtarı</target>
+      </trans-unit>
+      <trans-unit id="58e0bfa48466e33bebc1286f363a2939" approved="yes">
+        <source>Your MorPOS API Key</source>
+        <target state="final">MorPOS API Anahtarınız</target>
+      </trans-unit>
+      <trans-unit id="aafa8e9f3a2adc6b507c110f77fd4e2e" approved="yes">
+        <source>Payment Form Type</source>
+        <target state="final">Ödeme Formu Türü</target>
+      </trans-unit>
+      <trans-unit id="4619aebf337112c46fb893fc903290e0" approved="yes">
+        <source>Hosted Payment</source>
+        <target state="final">Hosted Payment Page</target>
+      </trans-unit>
+      <trans-unit id="311ea13bfd9587b054e942c02c90370e" approved="yes">
+        <source>Embedded Payment</source>
+        <target state="final">Embedded Payment</target>
+      </trans-unit>
+      <trans-unit id="d20d5f6fffea96b8988b2be08371c4cc" approved="yes">
+        <source>Success Order Status</source>
+        <target state="final">Başarılı Sipariş Durumu</target>
+      </trans-unit>
+      <trans-unit id="71952672add8146b7efb7c4074b27fa9" approved="yes">
+        <source>Failed Order Status</source>
+        <target state="final">Başarısız Sipariş Durumu</target>
+      </trans-unit>
+      <trans-unit id="2e5910077b96aca063f097d090f0dd01" approved="yes">
+        <source>Save Changes</source>
+        <target state="final">Değişiklikleri Kaydet</target>
+      </trans-unit>
+      <trans-unit id="29e34783176a4e97997402c857c53c3c" approved="yes">
+        <source>System Requirements</source>
+        <target state="final">Sistem Gereksinimleri</target>
+      </trans-unit>
+      <trans-unit id="7aaaf68128ddb05e9abe969c20c328ad" approved="yes">
+        <source>The table below shows the current state of your server environment. Please ensure all requirements are met for optimal performance.</source>
+        <target state="final">Aşağıdaki tablo sunucu ortamınızın mevcut durumunu göstermektedir. Optimum performans için tüm gereksinimlerin karşılandığından emin olun.</target>
+      </trans-unit>
+      <trans-unit id="06acd7c39cc75a3aa60981aafdfef0e2" approved="yes">
+        <source>Requirements</source>
+        <target state="final">Gereksinimler</target>
+      </trans-unit>
+      <trans-unit id="c029043bcdda6c722045a0116f7f29a7" approved="yes">
+        <source>Component</source>
+        <target state="final">Bileşen</target>
+      </trans-unit>
+      <trans-unit id="da0d6a04a182f66d858208bc4836447a" approved="yes">
+        <source>Current</source>
+        <target state="final">Mevcut</target>
+      </trans-unit>
+      <trans-unit id="f2f7a9f9322ada14ccd025bd0b8bb49c" approved="yes">
+        <source>Recommended</source>
+        <target state="final">Önerilen</target>
+      </trans-unit>
+      <trans-unit id="8676844a408d5f4e9f2246b3bc607004" approved="yes">
+        <source>Required</source>
+        <target state="final">Gerekli</target>
+      </trans-unit>
+      <trans-unit id="6b194fac39a803873f814d0ee55c812b" approved="yes">
+        <source>Available, but please upgrade for better performance and security.</source>
+        <target state="final">Mevcut, ancak daha iyi performans ve güvenlik için lütfen yükseltin.</target>
+      </trans-unit>
+      <trans-unit id="d4e6dac1cab8e89c4b030bb6ba5e4ccb" approved="yes">
+        <source>Payments cannot be processed until the server supports TLS 1.2 or newer.</source>
+        <target state="final">Sunucu TLS 1.2 veya daha yenisini destekleyene kadar ödemeler işlenemez.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

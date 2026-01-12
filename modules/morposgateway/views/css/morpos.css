@@ -1,0 +1,579 @@
+/* Modal styles for MorPOS payment iframe */
+#morpos-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+#morpos-modal.show {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+#morpos-modal-content {
+  position: relative;
+  background: #fff;
+  width: 90%;
+  max-width: 900px;
+  height: 80vh;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+#morpos-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10000;
+  background: #fff;
+  border: none;
+  font-size: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  line-height: 1;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+#morpos-close-btn:hover {
+  background: #f0f0f0;
+  color: #000;
+  transform: scale(1.1);
+}
+
+#morpos-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Loading state inside modal */
+.morpos-loading {
+  text-align: center;
+  padding: 40px 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.morpos-spinner {
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.morpos-spinner .spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.3em;
+}
+
+.morpos-loading-text {
+  color: #6b7280;
+  font-size: 16px;
+  margin: 10px 0 0 0;
+  font-weight: 500;
+}
+
+/* Common Alert Component Styles */
+.morpos-alert {
+  margin: 20px 0;
+  padding: 16px 20px;
+  border: 1px solid;
+  border-left-width: 4px;
+}
+
+.morpos-alert-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.morpos-alert-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.morpos-alert-icon .material-icons {
+  font-size: 24px;
+}
+
+.morpos-alert-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.morpos-alert-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.morpos-alert-message {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.morpos-alert-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.morpos-alert-details {
+  display: block;
+  margin: 8px 0 0 0;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  font-family: 'Courier New', monospace;
+}
+
+/* Alert Variants */
+.morpos-error {
+  background-color: #fff1f2;
+  border-color: #ffe4e6;
+  border-left-color: #ef4444;
+}
+
+.morpos-error .morpos-alert-icon .material-icons {
+  color: #ef4444;
+}
+
+.morpos-error .morpos-alert-title,
+.morpos-error .morpos-alert-message,
+.morpos-error .morpos-alert-text {
+  color: #9f1239;
+}
+
+.morpos-error .morpos-alert-details {
+  background-color: rgba(239, 68, 68, 0.05);
+  color: #9f1239;
+}
+
+.morpos-success {
+  background-color: #ecfdf5;
+  border-color: #d1fae5;
+  border-left-color: #10b981;
+}
+
+.morpos-success .morpos-alert-icon .material-icons {
+  color: #10b981;
+}
+
+.morpos-success .morpos-alert-title,
+.morpos-success .morpos-alert-message,
+.morpos-success .morpos-alert-text {
+  color: #065f46;
+}
+
+.morpos-info {
+  background-color: #e0f2fe;
+  border-color: #bae6fd;
+  border-left-color: #0284c7;
+}
+
+.morpos-info .morpos-alert-icon .material-icons {
+  color: #0284c7;
+}
+
+.morpos-info .morpos-alert-title,
+.morpos-info .morpos-alert-message,
+.morpos-info .morpos-alert-text {
+  color: #0c4a6e;
+}
+
+/* Legacy class names for backwards compatibility */
+.morpos-error-wrapper,
+.morpos-success-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.morpos-error-icon,
+.morpos-success-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+#morpos-error-content,
+.morpos-error-content-retry,
+.morpos-success-content {
+  flex: 1;
+  min-width: 0;
+}
+
+#morpos-error-title,
+.morpos-error-title-retry,
+.morpos-success-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+#morpos-error-message,
+.morpos-error-message-retry,
+.morpos-error-text-retry,
+.morpos-success-message,
+.morpos-success-reference,
+.morpos-success-info {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.morpos-error-text-retry,
+.morpos-success-info {
+  margin-bottom: 0;
+}
+
+#morpos-error-details {
+  display: block;
+  margin: 8px 0 0 0;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  font-family: 'Courier New', monospace;
+}
+
+/* Body scroll lock */
+body.morpos-modal-open {
+  overflow: hidden;
+}
+
+/* Payment info styles */
+.morpos-payment-info {
+  padding: 10px;
+  border-left: 3px solid #7c3aed;
+  background: #f9fafb;
+  margin: 10px 0;
+}
+
+.morpos-payment-info p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Payment page styles */
+#morposgateway-payment .card-block,
+#morposgateway-retry .card-block {
+  margin-bottom: 1rem;
+}
+
+#morposgateway-payment .alert,
+#morposgateway-retry .alert {
+  margin-bottom: 1.5rem;
+}
+
+#morposgateway-payment .alert .warning,
+#morposgateway-retry .alert .warning {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 0.5rem;
+}
+
+#morposgateway-payment .alert .label,
+#morposgateway-retry .alert .label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+#morposgateway-payment .alert .material-icons,
+#morposgateway-retry .alert .material-icons {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* Retry page specific styles */
+.morpos-retry-page {
+  padding: 20px 0;
+}
+
+.morpos-retry-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.morpos-retry-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  margin-top: 20px;
+}
+
+.morpos-retry-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.morpos-retry-header .material-icons {
+  font-size: 28px;
+  color: #6b7280;
+}
+
+.morpos-retry-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.morpos-retry-body {
+  padding: 24px;
+}
+
+.morpos-order-info {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.morpos-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.morpos-info-row:not(:last-child) {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.morpos-info-row.morpos-info-amount {
+  padding-top: 12px;
+}
+
+.morpos-info-label {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.morpos-info-value {
+  font-size: 15px;
+  color: #111827;
+  font-weight: 600;
+}
+
+.morpos-info-amount .morpos-info-value {
+  font-size: 18px;
+  color: #7c3aed;
+}
+
+.morpos-retry-message {
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 24px 0;
+}
+
+.morpos-retry-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+  color: #fff;
+}
+
+.morpos-retry-button .material-icons {
+  font-size: 20px;
+}
+
+.morpos-retry-button:hover {
+  background-color: #6d28d9;
+  border-color: #6d28d9;
+  box-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
+}
+
+.morpos-retry-button:active {
+  background-color: #5b21b6;
+  border-color: #5b21b6;
+}
+
+.morpos-retry-button:focus {
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 0.2rem rgba(124, 58, 237, 0.25);
+}
+
+/* Retry Error Page */
+.morpos-retry-error-section {
+  padding-bottom: 20px;
+}
+
+.morpos-retry-error-actions {
+  margin-top: 24px;
+}
+
+/* Loading state */
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+}
+
+.btn-loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spinner 0.6s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  #morpos-modal-content {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    max-width: none;
+  }
+
+  #morpos-close-btn {
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 32px;
+  }
+
+  .morpos-loading {
+    padding: 30px 15px;
+  }
+
+  .morpos-error {
+    margin: 15px 0;
+    border-radius: 0;
+  }
+
+  .morpos-retry-container {
+    padding: 0 15px;
+  }
+
+  .morpos-retry-header {
+    padding: 16px 20px;
+  }
+
+  .morpos-retry-body {
+    padding: 20px;
+  }
+
+  .morpos-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .morpos-spinner .spinner-border {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .morpos-loading-text {
+    font-size: 14px;
+  }
+}
+
+/* Alternative Links Section (Simple) */
+.morpos-alternative-links {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.morpos-alternative-text {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.morpos-alternative-hint {
+  color: #888;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.morpos-alternative-hint a {
+  color: #7c3aed;
+  text-decoration: underline;
+}
+
+.morpos-alternative-hint a:hover {
+  color: #5b21b6;
+}
