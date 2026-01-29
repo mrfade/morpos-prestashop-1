@@ -7,7 +7,7 @@
  * @license MIT
  *}
 
-{if $paymentDetails.payment_id || $paymentDetails.conversation_id}
+{if $paymentDetails.amount || $paymentDetails.card_number}
 <section id="{$moduleName|escape:'html':'UTF-8'}-displayOrderDetail" class="box">
   <h4>
     <i class="material-icons" style="vertical-align: middle;">credit_card</i>
@@ -15,44 +15,33 @@
   </h4>
   
   <table class="table table-bordered">
-    {if $paymentDetails.payment_id}
+    {if $paymentDetails.amount}
       <tr>
-        <td class="text-muted" style="width: 40%;">{l s='Transaction ID' mod='morposgateway'}</td>
-        <td><strong>{$paymentDetails.payment_id|escape:'html':'UTF-8'}</strong></td>
-      </tr>
-    {/if}
-    
-    {if $paymentDetails.conversation_id}
-      <tr>
-        <td class="text-muted">{l s='Reference' mod='morposgateway'}</td>
-        <td><strong>{$paymentDetails.conversation_id|escape:'html':'UTF-8'}</strong></td>
-      </tr>
-    {/if}
-    
-    {if $paymentDetails.bank_reference}
-      <tr>
-        <td class="text-muted">{l s='Bank Reference' mod='morposgateway'}</td>
-        <td>{$paymentDetails.bank_reference|escape:'html':'UTF-8'}</td>
+        <td class="text-muted" style="width: 40%;">{l s='Amount Paid' mod='morposgateway'}</td>
+        <td><strong class="text-success">{$paymentDetails.amount|escape:'html':'UTF-8'}</strong></td>
       </tr>
     {/if}
     
     {if $paymentDetails.card_number}
       <tr>
-        <td class="text-muted">{l s='Card' mod='morposgateway'}</td>
-        <td>{$paymentDetails.card_number|escape:'html':'UTF-8'}</td>
+        <td class="text-muted">{l s='Payment Method' mod='morposgateway'}</td>
+        <td>
+          <i class="material-icons" style="font-size: 16px; vertical-align: middle;">credit_card</i>
+          {$paymentDetails.card_number|escape:'html':'UTF-8'}
+        </td>
       </tr>
     {/if}
     
-    {if $paymentDetails.amount}
+    {if $paymentDetails.installments && $paymentDetails.installments > 1}
       <tr>
-        <td class="text-muted">{l s='Amount' mod='morposgateway'}</td>
-        <td><strong>{$paymentDetails.amount|escape:'html':'UTF-8'}</strong></td>
+        <td class="text-muted">{l s='Installments' mod='morposgateway'}</td>
+        <td><span class="badge badge-info">{$paymentDetails.installments|escape:'html':'UTF-8'}x</span></td>
       </tr>
     {/if}
     
     {if $paymentDetails.date}
       <tr>
-        <td class="text-muted">{l s='Date' mod='morposgateway'}</td>
+        <td class="text-muted">{l s='Payment Date' mod='morposgateway'}</td>
         <td>{$paymentDetails.date|escape:'html':'UTF-8'}</td>
       </tr>
     {/if}
