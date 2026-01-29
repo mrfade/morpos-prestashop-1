@@ -2,7 +2,7 @@
 <module>
     <name>morposgateway</name>
     <displayName><![CDATA[MorPOS Payment Plugin]]></displayName>
-    <version><![CDATA[1.0.0]]></version>
+    <version><![CDATA[1.0.1]]></version>
     <description><![CDATA[Accept credit card payments through MorPOS Payment Plugin. Supports both hosted and embedded payment forms with secure transaction processing.]]></description>
     <author><![CDATA[Morpara]]></author>
     <tab><![CDATA[payments_gateways]]></tab>

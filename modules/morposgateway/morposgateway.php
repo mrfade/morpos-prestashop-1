@@ -5,7 +5,7 @@
  * @author Morpara
  * @copyright 2026 Morpara
  * @license MIT
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 if (!defined('_PS_VERSION_')) {
@@ -17,10 +17,11 @@ use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 require_once dirname(__FILE__) . '/classes/MorposClient.php';
 require_once dirname(__FILE__) . '/classes/MorposCurrency.php';
 require_once dirname(__FILE__) . '/classes/MorposConversation.php';
+require_once dirname(__FILE__) . '/classes/MorposEncryption.php';
 
 class MorposGateway extends PaymentModule
 {
-    const MODULE_VERSION = '1.0.0';
+    const MODULE_VERSION = '1.0.1';
 
     /**
      * List of hooks used by this module
@@ -54,6 +55,7 @@ class MorposGateway extends PaymentModule
             'validate',
             'callback',
             'retry',
+            'proxy',
         );
 
         parent::__construct();
@@ -1037,48 +1039,50 @@ class MorposGateway extends PaymentModule
     protected function getPaymentDetailsForOrder(Order $order)
     {
         $details = array(
-            'transaction_id' => '',
             'payment_id' => '',
             'conversation_id' => '',
             'bank_reference' => '',
             'card_number' => '',
             'amount' => '',
             'date' => '',
+            'installments' => '',
         );
 
-        if ($order->getOrderPaymentCollection()->count()) {
-            /** @var OrderPayment $orderPayment */
-            $orderPayment = $order->getOrderPaymentCollection()->getFirst();
+        $payments = $order->getOrderPaymentCollection();
+        if ($payments->count()) {
+            // Get the last payment record
+            $orderPayment = $payments->getLast() ?: $payments->getFirst();
 
-            $details['transaction_id'] = $orderPayment->transaction_id;
-            $details['card_number'] = $orderPayment->card_number;
-            $details['amount'] = $this->formatPriceCompat(
-                $orderPayment->amount,
-                (int) $orderPayment->id_currency
-            );
-            $details['date'] = Tools::displayDate($orderPayment->date_add, true);
+            if ($orderPayment) {
+                // Standard OrderPayment fields
+                $details['payment_id'] = $orderPayment->transaction_id;
+                $details['card_number'] = $orderPayment->card_number;
+                $details['amount'] = $this->formatPriceCompat(
+                    $orderPayment->amount,
+                    (int) $orderPayment->id_currency
+                );
+                $details['date'] = Tools::displayDate($orderPayment->date_add, true);
+            }
+        }
 
-            // Parse transaction_id to extract individual components
-            // Format: PaymentID:ABC123|ConversationID:XYZ789|BankRef:123456
-            if (!empty($orderPayment->transaction_id)) {
-                $parts = explode('|', $orderPayment->transaction_id);
-                foreach ($parts as $part) {
-                    $keyValue = explode(':', $part, 2);
-                    if (count($keyValue) === 2) {
-                        $key = trim($keyValue[0]);
-                        $value = trim($keyValue[1]);
-                        switch ($key) {
-                            case 'PaymentID':
-                                $details['payment_id'] = $value;
-                                break;
-                            case 'ConversationID':
-                                $details['conversation_id'] = $value;
-                                break;
-                            case 'BankRef':
-                                $details['bank_reference'] = $value;
-                                break;
-                        }
-                    }
+        // Fetch extra payment info from conversation_attempt table
+        // This keeps OrderPayment fields clean and avoids showing JSON in customer UI
+        $conversationData = MorposConversation::getLatestPaymentResultForOrder((int) $order->id);
+        if (!empty($conversationData)) {
+            $details['conversation_id'] = isset($conversationData['conversation_id'])
+                ? $conversationData['conversation_id'] : '';
+            
+            if (isset($conversationData['payment_result']) && is_array($conversationData['payment_result'])) {
+                $result = $conversationData['payment_result'];
+                if (isset($result['bankReference'])) {
+                    $details['bank_reference'] = $result['bankReference'];
+                }
+                if (isset($result['installments'])) {
+                    $details['installments'] = $result['installments'];
+                }
+                // If payment_id is empty in OrderPayment, try to get from conversation
+                if (empty($details['payment_id']) && isset($result['paymentId'])) {
+                    $details['payment_id'] = $result['paymentId'];
                 }
             }
         }

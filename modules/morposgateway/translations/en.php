@@ -3,7 +3,7 @@
  * MorPOS Payment Plugin - English Translations
  * 
  * Auto-generated with MD5 hashes for PrestaShop Classic Translation System
- * Generated: 2026-01-12 02:03:50
+ * Generated: 2026-01-22 00:28:20
  * 
  * @author Morpara
  * @copyright 2026 Morpara
@@ -50,6 +50,14 @@ $_MODULE['<{morposgateway}prestashop>morposgateway_952b6559aa617beb13b98a54917c7
 $_MODULE['<{morposgateway}prestashop>morposgateway_8c5e17be9421701a0bc5be34aac67acc'] = 'Payment initialization failed. Please try again.';
 $_MODULE['<{morposgateway}prestashop>morposgateway_b0887254c7f67ecdef33a1bcbbbff93f'] = 'Unable to connect to payment server. Please try again.';
 $_MODULE['<{morposgateway}prestashop>morposgateway_e73f1927f501e3dc82f4241849f7f7e4'] = 'Unable to connect to the payment server. Please check your connection and try again.';
+$_MODULE['<{morposgateway}prestashop>morposgateway_88427ec035734b45aae9f7d8859a5008'] = 'Transaction ID';
+$_MODULE['<{morposgateway}prestashop>morposgateway_63d5049791d9d79d86e9a108b0a999ca'] = 'Reference';
+$_MODULE['<{morposgateway}prestashop>morposgateway_dfe8ad4f53d33e1e34530d51b8ada68d'] = 'Bank Reference';
+$_MODULE['<{morposgateway}prestashop>morposgateway_b9d5311b62e7b21be2fab1cb513ab1cd'] = 'Payment Date:';
+$_MODULE['<{morposgateway}prestashop>morposgateway_5d3121fc5e724daa7416a9d810e8164b'] = 'Payment Information';
+$_MODULE['<{morposgateway}prestashop>morposgateway_6d7560b89fbffd271bb87ee69af1e374'] = 'Please save these details for your records. You may need them for any future inquiries.';
+$_MODULE['<{morposgateway}prestashop>morposgateway_66e59abdb49ba901e35c4950ac216347'] = 'Payment Completed';
+$_MODULE['<{morposgateway}prestashop>morposgateway_09760bb5cd2ff5c6609d74b641771f99'] = 'Your payment has been processed successfully. A confirmation email has been sent to your email address.';
 
 // ============================================================
 // Source: validate
@@ -228,41 +236,38 @@ $_MODULE['<{morposgateway}prestashop>displayadminorderleft_0b6c0ecb63b8e0017bb87
 // Source: displayadminordermainbottom
 // ============================================================
 $_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_accea76d09b0193c332cf51c646a205c'] = 'Payment Details';
+$_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_1d565b9e5303987bb1b1938d5d458bca'] = 'Card';
+$_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_b2f40690858b404ed10e62bdf422c704'] = 'Amount';
+$_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_44749712dbec183e983dcd78a7736c41'] = 'Date';
+$_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_ba5376b5ba3216a7a51eabb18265d921'] = 'Installments';
 $_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_3d2ebc813f61bf5f17a5a70ea97da641'] = 'Payment ID:';
 $_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_bad24b99bed1c456f168f4951f1ef5a9'] = 'Conversation ID:';
-$_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_4ede6833c3d8b47852815e4bc82c0150'] = 'Bank Reference:';
-$_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_6702a6e3bc2dce95c3e3b61fe578f29c'] = 'Amount:';
-$_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_0b6c0ecb63b8e0017bb87534c2c61258'] = 'Full Transaction Reference:';
-$_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_b9d5311b62e7b21be2fab1cb513ab1cd'] = 'Payment Date:';
-$_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_623990b71104bea810bac8c9ebc08471'] = 'Card:';
+$_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_475ca6902ba52590d815232ecaf5749a'] = 'Bank Ref:';
+$_MODULE['<{morposgateway}prestashop>displayadminordermainbottom_44cabcbe801ccc16af2bfa8d7645c290'] = 'Payment details not available yet.';
 
 // ============================================================
 // Source: displayorderconfirmation
 // ============================================================
-$_MODULE['<{morposgateway}prestashop>displayorderconfirmation_4ede6833c3d8b47852815e4bc82c0150'] = 'Bank Reference:';
-$_MODULE['<{morposgateway}prestashop>displayorderconfirmation_623990b71104bea810bac8c9ebc08471'] = 'Card:';
-$_MODULE['<{morposgateway}prestashop>displayorderconfirmation_5d3121fc5e724daa7416a9d810e8164b'] = 'Payment Information';
-$_MODULE['<{morposgateway}prestashop>displayorderconfirmation_57d5b6ac7b2a08b1d26f60e02fa6da51'] = 'Transaction ID:';
-$_MODULE['<{morposgateway}prestashop>displayorderconfirmation_3dd42bfc8345e82c43b4a40a3426ec49'] = 'Reference:';
-$_MODULE['<{morposgateway}prestashop>displayorderconfirmation_6d7560b89fbffd271bb87ee69af1e374'] = 'Please save these details for your records. You may need them for any future inquiries.';
+$_MODULE['<{morposgateway}prestashop>displayorderconfirmation_accea76d09b0193c332cf51c646a205c'] = 'Payment Details';
+$_MODULE['<{morposgateway}prestashop>displayorderconfirmation_1d565b9e5303987bb1b1938d5d458bca'] = 'Card';
+$_MODULE['<{morposgateway}prestashop>displayorderconfirmation_388fd2767ba1fd2296f536425d106de3'] = 'Amount Paid';
+$_MODULE['<{morposgateway}prestashop>displayorderconfirmation_ba5376b5ba3216a7a51eabb18265d921'] = 'Installments';
 
 // ============================================================
 // Source: displayorderdetail
 // ============================================================
 $_MODULE['<{morposgateway}prestashop>displayorderdetail_accea76d09b0193c332cf51c646a205c'] = 'Payment Details';
-$_MODULE['<{morposgateway}prestashop>displayorderdetail_88427ec035734b45aae9f7d8859a5008'] = 'Transaction ID';
-$_MODULE['<{morposgateway}prestashop>displayorderdetail_63d5049791d9d79d86e9a108b0a999ca'] = 'Reference';
-$_MODULE['<{morposgateway}prestashop>displayorderdetail_dfe8ad4f53d33e1e34530d51b8ada68d'] = 'Bank Reference';
-$_MODULE['<{morposgateway}prestashop>displayorderdetail_1d565b9e5303987bb1b1938d5d458bca'] = 'Card';
-$_MODULE['<{morposgateway}prestashop>displayorderdetail_b2f40690858b404ed10e62bdf422c704'] = 'Amount';
-$_MODULE['<{morposgateway}prestashop>displayorderdetail_44749712dbec183e983dcd78a7736c41'] = 'Date';
+$_MODULE['<{morposgateway}prestashop>displayorderdetail_388fd2767ba1fd2296f536425d106de3'] = 'Amount Paid';
+$_MODULE['<{morposgateway}prestashop>displayorderdetail_707436a5aa13b82a4d777f64c717a625'] = 'Payment Method';
+$_MODULE['<{morposgateway}prestashop>displayorderdetail_ba5376b5ba3216a7a51eabb18265d921'] = 'Installments';
+$_MODULE['<{morposgateway}prestashop>displayorderdetail_31738cd694667ccdfa2cbc65249de5cc'] = 'Payment Date';
 
 // ============================================================
 // Source: displaypdfinvoice
 // ============================================================
 $_MODULE['<{morposgateway}prestashop>displaypdfinvoice_623990b71104bea810bac8c9ebc08471'] = 'Card:';
+$_MODULE['<{morposgateway}prestashop>displaypdfinvoice_475ca6902ba52590d815232ecaf5749a'] = 'Bank Ref:';
 $_MODULE['<{morposgateway}prestashop>displaypdfinvoice_57d5b6ac7b2a08b1d26f60e02fa6da51'] = 'Transaction ID:';
 $_MODULE['<{morposgateway}prestashop>displaypdfinvoice_3dd42bfc8345e82c43b4a40a3426ec49'] = 'Reference:';
 $_MODULE['<{morposgateway}prestashop>displaypdfinvoice_fbd269affac9a1b8c8d9f8ec322fb0d2'] = 'MorPOS Payment Details';
-$_MODULE['<{morposgateway}prestashop>displaypdfinvoice_475ca6902ba52590d815232ecaf5749a'] = 'Bank Ref:';
 
