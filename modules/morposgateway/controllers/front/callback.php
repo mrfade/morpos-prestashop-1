@@ -2,6 +2,20 @@
 /**
  * MorPOS Payment Callback Controller
  *
+ * This controller handles payment callbacks from the MorPOS payment gateway.
+ *
+ * IMPORTANT: Cookie/Session handling
+ * This controller DISABLES cookie writing to prevent SameSite cookie issues.
+ *
+ * Problem: When the payment gateway POSTs back to this callback URL, browsers
+ * with SameSite=Lax/Strict cookies won't send session cookies on cross-site
+ * POST requests. If we try to write cookies here, it creates new session data
+ * that conflicts with the user's existing session.
+ *
+ * Solution: We call $this->context->cookie->disallowWriting() in init() to
+ * prevent any cookie writes during this request. All session/cookie operations
+ * are deferred to the Proxy controller, which is accessed via same-origin GET.
+ *
  * @author Morpara
  * @copyright 2026 Morpara
  * @license MIT
@@ -10,6 +24,32 @@
 class MorposGatewayCallbackModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
+
+    /**
+     * Initialize controller
+     *
+     * CRITICAL: Disable cookie writing to prevent SameSite cookie issues.
+     * Since this is a cross-site POST from the payment gateway, any cookie
+     * writes would create a new session instead of using the customer's
+     * existing session. All cookie/session operations are deferred to the
+     * Proxy controller.
+     */
+    public function init()
+    {
+        // Disable cookie writing BEFORE parent::init() to prevent any session issues
+        // This is crucial for SameSite cookie compatibility
+        if (isset($this->context->cookie)) {
+            $this->context->cookie->disallowWriting();
+        }
+
+        parent::init();
+
+        // Double-check: ensure cookie writing is disabled after parent init
+        // (parent init might recreate cookie object in some PS versions)
+        if (isset($this->context->cookie)) {
+            $this->context->cookie->disallowWriting();
+        }
+    }
 
     /**
      * Post process - handle callback from MorPOS
@@ -208,7 +248,7 @@ class MorposGatewayCallbackModuleFrontController extends ModuleFrontController
                 'success' => false,
                 'error_code' => $resultCode,
                 'error_message' => !empty($message) && $message !== 'Approved' ?
-                    $message : $this->module->l('Payment failed.', 'callback')
+                    $this->repairMojibake($message) : $this->module->l('Payment failed.', 'callback')
             );
         }
 
@@ -251,7 +291,7 @@ class MorposGatewayCallbackModuleFrontController extends ModuleFrontController
                 'success' => false,
                 'error_code' => $checkResponseCode,
                 'error_message' => !empty($checkResponseDescription) && $checkResponseDescription !== 'Approved' ?
-                    $checkResponseDescription : $this->module->l('Payment failed.', 'callback')
+                    $this->repairMojibake($checkResponseDescription) : $this->module->l('Payment failed.', 'callback')
             );
         }
 
@@ -290,37 +330,45 @@ class MorposGatewayCallbackModuleFrontController extends ModuleFrontController
 
     /**
      * Handle embedded form response
+     *
+     * For embedded payments, we render a result page that sends a postMessage
+     * to the parent window. The redirect URL uses the proxy to ensure proper
+     * session/cookie handling when the parent window navigates.
      */
     protected function handleEmbeddedResponse($order, $callbackResult)
     {
         $isSuccess = isset($callbackResult['success']) && $callbackResult['success'];
+        $errorMessage = isset($callbackResult['error_message']) ? $callbackResult['error_message'] : '';
 
-        // Store error message in cookie for display
-        if (!$isSuccess && isset($callbackResult['error_message'])) {
-            $this->context->cookie->morpos_error_message = $callbackResult['error_message'];
-        }
-
-        // Set redirect URL based on success/failure
-        $redirectUrl = $isSuccess ?
-            $this->context->link->getPageLink('order-confirmation', true, null, array(
-                'id_cart' => $order->id_cart,
-                'id_module' => $this->module->id,
-                'id_order' => $order->id,
-                'key' => $order->secure_key
-            )) :
-            $this->context->link->getModuleLink(
+        // Build redirect URLs via proxy for proper session handling
+        if ($isSuccess) {
+            $redirectUrl = MorposEncryption::buildProxyUrl(
+                $this->context,
+                $this->module->name,
+                'order-confirmation',
+                null,
+                (int) $order->id,
+                (int) $order->id_cart,
+                $order->secure_key
+            );
+        } else {
+            $redirectUrl = MorposEncryption::buildProxyUrl(
+                $this->context,
                 $this->module->name,
                 'retry',
-                array('id_order' => $order->id),
-                true
+                $errorMessage,
+                (int) $order->id,
+                (int) $order->id_cart,
+                null
             );
+        }
 
         $this->context->smarty->assign(array(
             'status' => $isSuccess ? 'success' : 'failure',
             'order_id' => $order->id,
             'order_reference' => isset($order->reference) ? $order->reference : $order->id,
             'redirect_url' => $redirectUrl,
-            'error_message' => isset($callbackResult['error_message']) ? $callbackResult['error_message'] : '',
+            'error_message' => $errorMessage,
             'text_processing_title' => $this->module->l('Processing Payment', 'callback'),
             'text_processing_heading' => $this->module->l('Payment Processing', 'callback'),
             'text_processing_message' => $this->module->l('Please wait while we process your payment...', 'callback'),
@@ -335,30 +383,44 @@ class MorposGatewayCallbackModuleFrontController extends ModuleFrontController
 
     /**
      * Handle hosted form response
+     *
+     * Uses proxy redirect to solve SameSite cookie restrictions.
+     * When the payment gateway POSTs back to our callback, browsers with
+     * SameSite=Lax/Strict cookies won't send session cookies on cross-site
+     * POST requests. The proxy acts as a same-origin GET request that can
+     * properly access and modify session/cookie data.
      */
     protected function handleHostedResponse($order, $callbackResult)
     {
         $isSuccess = isset($callbackResult['success']) && $callbackResult['success'];
 
         if ($isSuccess) {
-            // Success: redirect to order confirmation page
-            $redirectUrl = $this->context->link->getPageLink('order-confirmation', true, null, array(
-                'id_cart' => $order->id_cart,
-                'id_module' => $this->module->id,
-                'id_order' => $order->id,
-                'key' => $order->secure_key
-            ));
+            // Success: redirect via proxy to order confirmation page
+            // The proxy ensures session cookies are properly set for the confirmation page
+            $redirectUrl = MorposEncryption::buildProxyUrl(
+                $this->context,
+                $this->module->name,
+                'order-confirmation',
+                null, // no error
+                (int) $order->id,
+                (int) $order->id_cart,
+                $order->secure_key
+            );
         } else {
-            // Failed: store error and redirect to retry page with order ID
-            if (isset($callbackResult['error_message'])) {
-                $this->context->cookie->morpos_error_message = $callbackResult['error_message'];
-            }
+            // Failed: redirect via proxy to retry page
+            // The proxy will set the error message cookie since direct cookie setting
+            // may not work on cross-site POST redirects
+            $errorMessage = isset($callbackResult['error_message']) ?
+                $callbackResult['error_message'] : null;
 
-            $redirectUrl = $this->context->link->getModuleLink(
+            $redirectUrl = MorposEncryption::buildProxyUrl(
+                $this->context,
                 $this->module->name,
                 'retry',
-                array('id_order' => $order->id),
-                true
+                $errorMessage,
+                (int) $order->id,
+                (int) $order->id_cart,
+                null
             );
         }
 
@@ -473,7 +535,7 @@ class MorposGatewayCallbackModuleFrontController extends ModuleFrontController
 
     /**
      * Add order history with payment transaction record
-     * 
+     *
      * @param Order $order Order object
      * @param int $statusId Order state ID
      * @param array $paymentData Payment transaction details (transactionId, amount, etc.)
@@ -514,7 +576,7 @@ class MorposGatewayCallbackModuleFrontController extends ModuleFrontController
     /**
      * Add payment transaction record to order (visible in admin panel Payments tab)
      * Only for successful payments
-     * 
+     *
      * @param Order $order The order object
      * @param array $paymentData Transaction details (transactionId, conversationId, bankReference, amount, cardNumber, etc.)
      * @return bool Success status
@@ -526,39 +588,71 @@ class MorposGatewayCallbackModuleFrontController extends ModuleFrontController
         }
 
         try {
-            $payment = new OrderPayment();
-            $payment->order_reference = $order->reference;
-            $payment->id_currency = (int) $order->id_currency;
+            // Store extra payment info in conversation_attempt table (not in OrderPayment)
+            // This keeps the OrderPayment fields clean and standard
+            $conversationId = isset($paymentData['conversationId']) ? $paymentData['conversationId'] : '';
+            if (!empty($conversationId)) {
+                $extraInfo = array();
+                if (isset($paymentData['bankReference']) && !empty($paymentData['bankReference'])) {
+                    $extraInfo['bankReference'] = $paymentData['bankReference'];
+                }
+                if (isset($paymentData['installments']) && !empty($paymentData['installments'])) {
+                    $extraInfo['installments'] = $paymentData['installments'];
+                }
+                if (isset($paymentData['transactionId']) && !empty($paymentData['transactionId'])) {
+                    $extraInfo['paymentId'] = $paymentData['transactionId'];
+                }
+                if (!empty($extraInfo)) {
+                    MorposConversation::updateAttemptWithPaymentResult($conversationId, $extraInfo);
+                }
+            }
+
+            // Check if an OrderPayment already exists for this order
+            // PrestaShop might create one automatically depending on version/settings
+            $payments = $order->getOrderPaymentCollection();
+            $payment = null;
+
+            if ($payments->count() > 0) {
+                // Update existing payment record
+                $payment = $payments->getLast() ?: $payments->getFirst();
+            }
+
+            if (!$payment) {
+                // Create new payment record if none exists
+                $payment = new OrderPayment();
+                $payment->order_reference = $order->reference;
+                $payment->id_currency = (int) $order->id_currency;
+                $payment->conversion_rate = (float) $order->conversion_rate;
+            }
+
+            // Set/update payment details
             $payment->amount = isset($paymentData['amount']) ? (float) $paymentData['amount'] : (float) $order->total_paid;
-            $payment->payment_method = 'MorPOS';
-            $payment->conversion_rate = (float) $order->conversion_rate;
 
-            // Build transaction ID with structured format: PaymentID:ABC123|ConversationID:XYZ789|BankRef:123456
-            $txnParts = array();
+            // Store PaymentId as transaction_id (clean, standard field)
             if (isset($paymentData['transactionId']) && !empty($paymentData['transactionId'])) {
-                $txnParts[] = 'PaymentID:' . $paymentData['transactionId'];
+                $payment->transaction_id = $paymentData['transactionId'];
             }
-            if (isset($paymentData['conversationId']) && !empty($paymentData['conversationId'])) {
-                $txnParts[] = 'ConversationID:' . $paymentData['conversationId'];
-            }
-            if (isset($paymentData['bankReference']) && !empty($paymentData['bankReference'])) {
-                $txnParts[] = 'BankRef:' . $paymentData['bankReference'];
-            }
-            $payment->transaction_id = !empty($txnParts) ? implode('|', $txnParts) : '';
 
-            // Card details
+            // Store masked card number (clean, standard field)
             if (isset($paymentData['cardNumber']) && !empty($paymentData['cardNumber'])) {
                 $payment->card_number = $paymentData['cardNumber'];
             }
 
-            if (!$payment->add()) {
-                throw new Exception('Failed to save OrderPayment');
+            // Save (add or update)
+            if ($payment->id) {
+                if (!$payment->update()) {
+                    throw new Exception('Failed to update OrderPayment');
+                }
+            } else {
+                if (!$payment->add()) {
+                    throw new Exception('Failed to save OrderPayment');
+                }
             }
 
             return true;
         } catch (Exception $e) {
             PrestaShopLogger::addLog(
-                'MorPOS: Failed to add order payment: ' . $e->getMessage(),
+                'MorPOS: Failed to add/update order payment: ' . $e->getMessage(),
                 3,
                 null,
                 'Order',
@@ -580,5 +674,43 @@ class MorposGatewayCallbackModuleFrontController extends ModuleFrontController
     protected function addOrderMessage($order, $message)
     {
         return $this->module->addOrderMessage($order, $message);
+    }
+
+    /**
+     * Repair mojibake encoding issues from API responses
+     *
+     * The MorPOS API sometimes returns partially mojibaked text where some characters
+     * are correct UTF-8 while others are UTF-8 bytes misinterpreted as ISO-8859-1.
+     * For example: "Geçersiz kart numarasÄ±" where "ç" is correct but "Ä±" should be "ı".
+     *
+     * We fix specific known mojibake sequences rather than converting the whole string,
+     * which would break the already-correct characters.
+     *
+     * @param string $string The string to repair
+     * @return string The repaired string
+     */
+    protected function repairMojibake($string)
+    {
+        if (empty($string)) {
+            return $string;
+        }
+
+        // Turkish character mojibake mappings (UTF-8 bytes decoded as ISO-8859-1)
+        $mojibakeMap = array(
+            'Ä±' => 'ı',  // dotless i
+            'Ä°' => 'İ',  // capital dotted I
+            'ÄŸ' => 'ğ',  // g-breve
+            'Äž' => 'Ğ',  // capital G-breve
+            'ÅŸ' => 'ş',  // s-cedilla
+            'Åž' => 'Ş',  // capital S-cedilla
+            'Ã¶' => 'ö',  // o-umlaut
+            'Ã–' => 'Ö',  // capital O-umlaut
+            'Ã¼' => 'ü',  // u-umlaut
+            'Ãœ' => 'Ü',  // capital U-umlaut
+            'Ã§' => 'ç',  // c-cedilla
+            'Ã‡' => 'Ç',  // capital C-cedilla
+        );
+
+        return str_replace(array_keys($mojibakeMap), array_values($mojibakeMap), $string);
     }
 }

@@ -7,48 +7,37 @@
  * @license MIT
  *}
 
-{if $paymentDetails.payment_id || $paymentDetails.conversation_id}
-<section id="{$moduleName|escape:'html':'UTF-8'}-displayOrderConfirmation" class="card mb-3">
-  <div class="card-block">
-    <h4 class="card-title h5">
-      <i class="material-icons" style="vertical-align: middle;">payment</i>
-      {l s='Payment Information' mod='morposgateway'}
-    </h4>
+{if $paymentDetails.amount || $paymentDetails.card_number}
+<section id="{$moduleName|escape:'html':'UTF-8'}-displayOrderConfirmation" class="box">
+  <h4>
+    <i class="material-icons" style="vertical-align: middle;">credit_card</i>
+    {l s='Payment Details' mod='morposgateway'}
+  </h4>
+  
+  <table class="table table-bordered">
+    {if $paymentDetails.amount}
+      <tr>
+        <td class="text-muted" style="width: 40%;">{l s='Amount Paid' mod='morposgateway'}</td>
+        <td><strong>{$paymentDetails.amount|escape:'html':'UTF-8'}</strong></td>
+      </tr>
+    {/if}
     
-    <div class="row">
-      {if $paymentDetails.payment_id}
-        <div class="col-md-6 col-sm-12 mb-2">
-          <span class="text-muted">{l s='Transaction ID:' mod='morposgateway'}</span><br>
-          <strong>{$paymentDetails.payment_id|escape:'html':'UTF-8'}</strong>
-        </div>
-      {/if}
-      
-      {if $paymentDetails.conversation_id}
-        <div class="col-md-6 col-sm-12 mb-2">
-          <span class="text-muted">{l s='Reference:' mod='morposgateway'}</span><br>
-          <strong>{$paymentDetails.conversation_id|escape:'html':'UTF-8'}</strong>
-        </div>
-      {/if}
-      
-      {if $paymentDetails.card_number}
-        <div class="col-md-6 col-sm-12 mb-2">
-          <span class="text-muted">{l s='Card:' mod='morposgateway'}</span><br>
-          <strong>{$paymentDetails.card_number|escape:'html':'UTF-8'}</strong>
-        </div>
-      {/if}
-      
-      {if $paymentDetails.bank_reference}
-        <div class="col-md-6 col-sm-12 mb-2">
-          <span class="text-muted">{l s='Bank Reference:' mod='morposgateway'}</span><br>
-          <strong>{$paymentDetails.bank_reference|escape:'html':'UTF-8'}</strong>
-        </div>
-      {/if}
-    </div>
+    {if $paymentDetails.card_number}
+      <tr>
+        <td class="text-muted">{l s='Card' mod='morposgateway'}</td>
+        <td>
+          <i class="material-icons" style="font-size: 16px; vertical-align: middle;">credit_card</i>
+          {$paymentDetails.card_number|escape:'html':'UTF-8'}
+        </td>
+      </tr>
+    {/if}
     
-    <p class="card-text small text-muted mt-2">
-      <i class="material-icons" style="font-size: 14px; vertical-align: middle;">info</i>
-      {l s='Please save these details for your records. You may need them for any future inquiries.' mod='morposgateway'}
-    </p>
-  </div>
+    {if $paymentDetails.installments && $paymentDetails.installments > 1}
+      <tr>
+        <td class="text-muted">{l s='Installments' mod='morposgateway'}</td>
+        <td>{$paymentDetails.installments|escape:'html':'UTF-8'}x</td>
+      </tr>
+    {/if}
+  </table>
 </section>
 {/if}

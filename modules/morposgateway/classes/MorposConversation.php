@@ -165,4 +165,89 @@ class MorposConversation
         
         return array();
     }
+
+    /**
+     * Update conversation attempt with payment result data
+     * Called after payment callback to store additional payment info
+     *
+     * @param string $conversationId
+     * @param array $paymentResult Payment result data (bankReference, installments, etc.)
+     * @return bool
+     */
+    public static function updateAttemptWithPaymentResult($conversationId, $paymentResult)
+    {
+        if (empty($conversationId) || empty($paymentResult)) {
+            return false;
+        }
+
+        // Get existing data
+        $existingData = self::getConversationData($conversationId);
+        
+        // Merge with payment result
+        $updatedData = array_merge($existingData, array(
+            'payment_result' => $paymentResult,
+            'payment_completed_at' => date('Y-m-d H:i:s'),
+        ));
+
+        $result = Db::getInstance()->update(
+            'morpos_conversation_attempt',
+            array('data' => pSQL(json_encode($updatedData))),
+            'conversation_id = \'' . pSQL($conversationId) . '\''
+        );
+
+        if (!$result) {
+            PrestaShopLogger::addLog(
+                'MorPOS: Failed to update conversation attempt with payment result - ConversationId: ' . 
+                $conversationId . ' - ' . Db::getInstance()->getMsgError(),
+                3,
+                null,
+                'Payment',
+                null,
+                true
+            );
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get the latest successful conversation data for an order
+     *
+     * @param int $orderId
+     * @return array
+     */
+    public static function getLatestPaymentResultForOrder($orderId)
+    {
+        if (empty($orderId)) {
+            return array();
+        }
+
+        // Get the latest conversation attempts for this order
+        $results = Db::getInstance()->executeS(
+            (new DbQuery())
+                ->select('conversation_id, data')
+                ->from('morpos_conversation_attempt')
+                ->where('order_id = ' . (int) $orderId)
+                ->orderBy('id DESC')
+        );
+
+        if ($results === false || empty($results)) {
+            return array();
+        }
+
+        // Find the first one with payment_result
+        foreach ($results as $row) {
+            if (!empty($row['data'])) {
+                $data = json_decode($row['data'], true);
+                if (is_array($data) && isset($data['payment_result'])) {
+                    return array(
+                        'conversation_id' => $row['conversation_id'],
+                        'payment_result' => $data['payment_result'],
+                    );
+                }
+            }
+        }
+
+        return array();
+    }
 }
