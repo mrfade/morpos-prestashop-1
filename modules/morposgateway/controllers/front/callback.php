@@ -48,9 +48,9 @@ class MorposGatewayCallbackModuleFrontController extends ModuleFrontController
             return;
         }
 
-        // Handle callback
-        $paidStatusId = (int) Configuration::get('MORPOS_SUCCESS_STATUS') ?: Configuration::get('PS_OS_PAYMENT');
-        $failStatusId = (int) Configuration::get('MORPOS_FAILED_STATUS') ?: Configuration::get('PS_OS_ERROR');
+        // Centralized status resolution (getFailedStatusId enforces failed !== paid).
+        $paidStatusId = MorposGateway::getSuccessStatusId();
+        $failStatusId = MorposGateway::getFailedStatusId();
 
         $callbackResult = $this->handleCallback($order, $paidStatusId, $failStatusId);
 
@@ -67,35 +67,14 @@ class MorposGatewayCallbackModuleFrontController extends ModuleFrontController
      */
     protected function handleCallback($order, $paidStatusId, $failStatusId)
     {
-        // Prevent duplicate processing with more robust check
-        // Check current state to avoid race conditions
         $currentState = (int) $order->getCurrentState();
 
-        // If already paid, don't process again
-        if ($currentState == $paidStatusId) {
-            PrestaShopLogger::addLog(
-                'MorPOS: Duplicate callback ignored - Order already paid: ' . $order->id,
-                2,
-                null,
-                'Order',
-                $order->id,
-                true
-            );
+        // Idempotency: skip only if the order is genuinely paid (real paid state), never on
+        // status-id match alone, so a failed order can't be mistaken for an already-paid one.
+        if ($currentState == $paidStatusId && $this->orderStateIsPaid($currentState)) {
             return array(
                 'success' => true,
                 'already_processed' => true
-            );
-        }
-
-        // If already processing (preparation status), log potential race condition
-        if ($currentState == Configuration::get('PS_OS_PREPARATION')) {
-            PrestaShopLogger::addLog(
-                'MorPOS: Concurrent callback detected for order in preparation: ' . $order->id,
-                2,
-                null,
-                'Order',
-                $order->id,
-                true
             );
         }
 
@@ -197,6 +176,23 @@ class MorposGatewayCallbackModuleFrontController extends ModuleFrontController
         $this->addOrderHistory($order, $paidStatusId, $paymentData, 'MorPOS: Payment SUCCESSFUL. ' . $shortInfo);
 
         return array('success' => true);
+    }
+
+    /**
+     * Whether an order state is a genuinely paid state (OrderState->paid).
+     *
+     * @param int $stateId Order state id
+     * @return bool
+     */
+    protected function orderStateIsPaid($stateId)
+    {
+        if (!$stateId) {
+            return false;
+        }
+
+        $state = new OrderState((int) $stateId);
+
+        return Validate::isLoadedObject($state) && (bool) $state->paid;
     }
 
     /**

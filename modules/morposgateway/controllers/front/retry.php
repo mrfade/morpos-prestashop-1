@@ -31,9 +31,11 @@ class MorposGatewayRetryModuleFrontController extends ModuleFrontController
     {
         $currentState = (int) $order->getCurrentState();
         $awaitingPaymentStatus = (int) Configuration::get('PS_OS_PREPARATION');
-        $failedPaymentStatus = (int) Configuration::get('MORPOS_FAILED_STATUS') ?: (int) Configuration::get('PS_OS_ERROR');
+        // Same failed-status resolution as the callback; PS_OS_ERROR always retryable.
+        $failedPaymentStatus = MorposGateway::getFailedStatusId();
+        $psError = (int) Configuration::get('PS_OS_ERROR');
 
-        return ($currentState == $awaitingPaymentStatus || $currentState == $failedPaymentStatus);
+        return in_array($currentState, array($awaitingPaymentStatus, $failedPaymentStatus, $psError), true);
     }
 
     /**

@@ -498,7 +498,7 @@ class MorposGatewayValidateModuleFrontController extends ModuleFrontController
             return;
         }
 
-        $failedStatusId = (int) Configuration::get('MORPOS_FAILED_STATUS') ?: Configuration::get('PS_OS_ERROR');
+        $failedStatusId = MorposGateway::getFailedStatusId();
 
         PrestaShopLogger::addLog(
             'MorPOS: Payment initialization failed for order: ' . $order->id . ' - ' . $errorMessage,

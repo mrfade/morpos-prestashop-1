@@ -20,7 +20,7 @@ require_once dirname(__FILE__) . '/classes/MorposConversation.php';
 
 class MorposGateway extends PaymentModule
 {
-    const MODULE_VERSION = '1.0.0';
+    const MODULE_VERSION = '1.0.2';
 
     /**
      * List of hooks used by this module
@@ -412,6 +412,33 @@ class MorposGateway extends PaymentModule
     }
 
     /**
+     * Order status for a successful (paid) payment.
+     *
+     * @return int Order state id
+     */
+    public static function getSuccessStatusId()
+    {
+        return (int) Configuration::get('MORPOS_SUCCESS_STATUS') ?: (int) Configuration::get('PS_OS_PAYMENT');
+    }
+
+    /**
+     * Order status for a failed payment. Shared by callback/retry/validate.
+     * Invariant: never equal to the paid status (falls back to PS_OS_ERROR).
+     *
+     * @return int Order state id
+     */
+    public static function getFailedStatusId()
+    {
+        $failStatusId = (int) Configuration::get('MORPOS_FAILED_STATUS') ?: (int) Configuration::get('PS_OS_ERROR');
+
+        if ($failStatusId === self::getSuccessStatusId()) {
+            $failStatusId = (int) Configuration::get('PS_OS_ERROR');
+        }
+
+        return $failStatusId;
+    }
+
+    /**
      * Process configuration form submission
      * Includes input validation for security
      *
@@ -442,6 +469,25 @@ class MorposGateway extends PaymentModule
 
         if (!Validate::isUnsignedId($failedStatus)) {
             $errors[] = $this->l('Invalid failed order status.');
+        }
+
+        // Success and failed statuses must differ, and success must be paid / failed must not be.
+        if (Validate::isUnsignedId($successStatus) && Validate::isUnsignedId($failedStatus)
+            && $successStatus === $failedStatus) {
+            $errors[] = $this->l('The success and failed order statuses must be different.');
+        }
+
+        if (Validate::isUnsignedId($successStatus)) {
+            $successState = new OrderState($successStatus);
+            if (Validate::isLoadedObject($successState) && !$successState->paid) {
+                $errors[] = $this->l('The success order status must be a paid status.');
+            }
+        }
+        if (Validate::isUnsignedId($failedStatus)) {
+            $failedState = new OrderState($failedStatus);
+            if (Validate::isLoadedObject($failedState) && $failedState->paid) {
+                $errors[] = $this->l('The failed order status must not be a paid status.');
+            }
         }
 
         if (!empty($errors)) {
